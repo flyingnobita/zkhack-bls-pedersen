@@ -3,8 +3,12 @@ use ark_serialize::CanonicalDeserialize;
 use std::io::Cursor;
 
 pub fn puzzle_data() -> (G2Affine, Vec<Vec<u8>>, Vec<G1Affine>) {
+
+    // public key
     let pk_bytes = hex::decode("0113bbda74ea0480677e185568f5e7ad3dbe40fc02ccacba4c735e6e45001640a694d204ad25411f72f928c9fec00f098fc345e4b7ceb95a68a00983f5693d37929c80b09230fafe537ac1fa06c43009dd1efeb1fab2d9d2a816319f08b38f0b").unwrap();
     let pk = G2Affine::deserialize(&mut Cursor::new(pk_bytes)).unwrap();
+
+    // messages string / username
     let ms_strs = [
         "f2faa8b1bb0f06c6142e788ad836d1f7d1abf95458a08a55593c594056ac225d",
         "518385d7e176c291bab8f797025de4b26a2b86c8e10f57d2e21b5a742ecb6029",
@@ -264,6 +268,8 @@ pub fn puzzle_data() -> (G2Affine, Vec<Vec<u8>>, Vec<G1Affine>) {
         "f7ec1334115b5fe74475f662d3d0190b4526b2bb5dcfb3e6f235f1e90f61d85a",
     ];
     let ms = ms_strs.iter().map(|&m| hex::decode(m).unwrap()).collect();
+
+    // signature string corresponding to the message
     let sigs_strs = [
         "487df6a1d9149e0c6f205c93deebbedb0605f73f1b0b66f0be2aca4f5b5f1c5c9a8aa226aaceb0b0f6c25a7ea9548106",
         "8d93bb04c4513d3115ed9d07d682b304752dabccde5ae1ab84a8c95ad7d0a796c2a5d60acc6d1aaab799800928d04a15",
